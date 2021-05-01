@@ -15,7 +15,7 @@ But for those of us that are faced with the challenge of needing to running untr
 An effective approach to improve workload isolation is to run each Pod within its own dedicated VM. This provides each Pod with a dedicated hypervisor, OS kernel, memory, and virtualized devices which are completely separate from the host OS. In this deployment scenario, when there's a vulnerability in the containerised workload - the hypervisor within the Pod provides a security boundary which protects the host operating system, as well as other workloads running on the host.
 
 ![alt text](images/kata-vs-traditional.png "Kata vs. Traditional containers")  
-Image courtesy of https://katacontainers.io
+*Image courtesy of https://katacontainers.io*
 
 If you're running on the AWS cloud, Amazon have made this approach very simple. Scheduling Pods using the managed Kubernetes service [EKS](https://aws.amazon.com/eks) with [Fargate](https://aws.amazon.com/fargate/) actually ensures that each Kubernetes Pod is automatically encapsulated inside it's own dedicated VM. This provides the highest level of isolation for each containerised workload.
 
@@ -46,7 +46,7 @@ Kata Containers 1.5 introduced the `shimv2` for containerd 1.2.0, reducing the c
 When configuring Kubernetes to integrate with Kata, typically a Kubernetes [`RuntimeClass`](https://kubernetes.io/docs/concepts/containers/runtime-class/) is created. The RuntimeClass provides the ability to select the container runtime configuration to be used for a given workload via the Pod spec submitted to the Kubernetes API.
 
 ![alt text](images/kata-shim-v2.png "Kata Shim V2")  
-Image courtesy of https://katacontainers.io
+*Image courtesy of https://katacontainers.io*
 
 #### About Amazon EKS Distro
 
