@@ -87,7 +87,7 @@ git clone https://gitlab.com/byteQualia/eksd-kata-containers.git
 
 ### Bootstrap the Cluster
 
-Next, bootstrap the cluster using kubeadm.
+Next, we bootstrap the cluster using kubeadm.
 
 #### Prepare the host
 
