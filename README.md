@@ -441,7 +441,7 @@ kubectl exec -it nginx -- bash -c "uname -r"
 4.14.225-169.362.amzn2.x86_64
 ```
 
-`nginx-kata` returns the kernel version reported by the kernel running inside the Kata VM, whereas `nginx` reports the kernel version of the host OS as it's running as a traditional runc container. 
+The `nginx-kata` Pod returns the kernel version reported by the kernel running inside the Kata VM, whereas the `nginx` Pod reports the kernel version of the host OS as it's running as a traditional runc container. 
 
 ## Conclusion
 
