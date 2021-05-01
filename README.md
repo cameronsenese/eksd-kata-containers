@@ -52,7 +52,7 @@ When configuring Kubernetes to integrate with Kata, typically a Kubernetes [`Run
 
 [Amazon EKS Distro](https://distro.eks.amazonaws.com) is a Kubernetes distribution used by Amazon EKS to help create reliable and secure clusters. EKS Distro includes binaries and containers from open source Kubernetes, etcd (cluster configuration database), networking, storage, and plugins, all tested for compatibility. You can deploy EKS Distro wherever your applications need to run.
 
-You can deploy EKS Distro clusters and let AWS take care of testing and tracking Kubernetes updates, dependencies, and patches. The source code, open source tools, and settings are provided for reproducible builds. EKS Distro provides extended support for Kubernetes, with builds of previous versions updated with the latest security patches. EKS Distro is available as open source on [GitHub](https://github.com/aws/eks-distro).
+You can deploy EKS Distro clusters and let AWS take care of testing and tracking Kubernetes updates, dependencies, and patches. The source code, open source tools, and settings are provided for consistent, reproducible builds. EKS Distro provides extended support for Kubernetes, with builds of previous versions updated with the latest security patches. EKS Distro is available as open source on [GitHub](https://github.com/aws/eks-distro).
 
 
 ## Tutorial
