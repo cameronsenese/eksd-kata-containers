@@ -45,8 +45,8 @@ Kata Containers 1.5 introduced the `shimv2` for containerd 1.2.0, reducing the c
 
 When configuring Kubernetes to integrate with Kata, typically a Kubernetes [`RuntimeClass`](https://kubernetes.io/docs/concepts/containers/runtime-class/) is created. The RuntimeClass provides the ability to select the container runtime configuration to be used for a given workload via the Pod spec submitted to the Kubernetes API.
 
-![alt text](images/kata-shim-v2.png "Kata Shim V2")
-> *Image courtesy of https://katacontainers.io*
+![alt text](images/kata-shim-v2.png "Kata Shim V2")  
+*Image courtesy of https://katacontainers.io*
 
 #### About Amazon EKS Distro
 
