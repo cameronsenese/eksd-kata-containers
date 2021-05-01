@@ -358,7 +358,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-Deploy a Pod network to the cluster. See Installing Addons (https://kubernetes.io/docs/concepts/cluster-administration/addons) for information on available Kubernetes Pod networks. For example, to deploy a Weaveworks network, type:
+Deploy a Pod network to the cluster. See Installing Addons (https://kubernetes.io/docs/concepts/cluster-administration/addons) for information on available Kubernetes Pod networks. For example, we deploy a Weaveworks network:
 
 ```bash
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=v1.18.9-eks-1-18-1"
