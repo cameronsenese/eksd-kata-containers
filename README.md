@@ -158,37 +158,37 @@ System can currently create Kata Containers
 Example `config.toml`:
 
 ```
-    [plugins.cri.containerd]
-      no_pivot = false
-    [plugins.cri.containerd.runtimes]
-      [plugins.cri.containerd.runtimes.runc]
-         runtime_type = "io.containerd.runc.v1"
-         [plugins.cri.containerd.runtimes.runc.options]
-           NoPivotRoot = false
-           NoNewKeyring = false
-           ShimCgroup = ""
-           IoUid = 0
-           IoGid = 0
-           BinaryName = "runc"
-           Root = ""
-           CriuPath = ""
-           SystemdCgroup = false
-      [plugins.cri.containerd.runtimes.kata]
-         runtime_type = "io.containerd.kata.v2"
-	 [plugins.cri.containerd.runtimes.kata.options]
-	   ConfigPath = "/opt/kata/share/defaults/kata-containers/configuration-qemu.toml"
-      [plugins.cri.containerd.runtimes.katacli]
-         runtime_type = "io.containerd.runc.v1"
-         [plugins.cri.containerd.runtimes.katacli.options]
-           NoPivotRoot = false
-           NoNewKeyring = false
-           ShimCgroup = ""
-           IoUid = 0
-           IoGid = 0
-           BinaryName = "/opt/kata/bin/kata-runtime"
-           Root = ""
-           CriuPath = ""
-           SystemdCgroup = false
+plugins.cri.containerd]
+ no_pivot = false
+plugins.cri.containerd.runtimes]
+ [plugins.cri.containerd.runtimes.runc]
+    runtime_type = "io.containerd.runc.v1"
+    [plugins.cri.containerd.runtimes.runc.options]
+      NoPivotRoot = false
+      NoNewKeyring = false
+      ShimCgroup = ""
+      IoUid = 0
+      IoGid = 0
+      BinaryName = "runc"
+      Root = ""
+      CriuPath = ""
+      SystemdCgroup = false
+ [plugins.cri.containerd.runtimes.kata]
+    runtime_type = "io.containerd.kata.v2"
+[plugins.cri.containerd.runtimes.kata.options]
+  ConfigPath = "/opt/kata/share/defaults/kata-containers/configuration-qemu.toml"
+ [plugins.cri.containerd.runtimes.katacli]
+    runtime_type = "io.containerd.runc.v1"
+    [plugins.cri.containerd.runtimes.katacli.options]
+      NoPivotRoot = false
+      NoNewKeyring = false
+      ShimCgroup = ""
+      IoUid = 0
+      IoGid = 0
+      BinaryName = "/opt/kata/bin/kata-runtime"
+      Root = ""
+      CriuPath = ""
+      SystemdCgroup = false
 ```
 
 From the cloned `eksd-kata-containers` repository, copy the file `/config/config.toml` to 
