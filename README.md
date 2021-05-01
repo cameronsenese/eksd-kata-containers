@@ -87,6 +87,8 @@ git clone https://gitlab.com/byteQualia/eksd-kata-containers.git
 
 ### Bootstrap the Cluster
 
+Next, bootstrap the cluster using kubeadm.
+
 #### Prepare the host
 
 Make sure SELinux is disabled by setting SELINUX=disabled in the /etc/sysconfig/selinux file. To turn it off immediately, type:
