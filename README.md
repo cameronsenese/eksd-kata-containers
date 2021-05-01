@@ -66,7 +66,7 @@ This tutorial will guide you through the following procedure:
 - Bootstrapping an EKS Disto Kubernetes cluster using kubeadm
 - Configuring a Kubernetes RuntimeClass to schedule Pods to Kata VMs running the QEMU/KVM hypervisor
 
-> *Note: The example EKS-D cluster deployment uses kubeadm to bring up the control-plane, which may not be your preferred method to bootstrap a cluster.  A number of AWS partners are also providing installation support for EKS Distro, including: Canonical (MicroK8s), Kubermatic (KubeOne), Kubestack, Nirmata, Rancher, and Weaveworks. For further information, see the [Partners section](https://distro.eks.amazonaws.com/users/install/partners/) at the EKS DIstro website.*
+> The example EKS-D cluster deployment uses kubeadm to bring up the control-plane, which may not be your preferred method to bootstrap a cluster.  A number of AWS partners are also providing installation support for EKS Distro, including: Canonical (MicroK8s), Kubermatic (KubeOne), Kubestack, Nirmata, Rancher, and Weaveworks. For further information, see the [Partners section](https://distro.eks.amazonaws.com/users/install/partners/) at the EKS DIstro website.*
 
 ### Prerequisites
 
