@@ -292,7 +292,7 @@ KUBELET_KUBEADM_ARGS="--cgroup-driver=systemd —network-plugin=cni —Pod-infra
 exit
 ```
 
-Get compatible binaries for kubeadm, kubelet, and kubectl. You can skip getting kubectl:
+Get compatible binaries for kubeadm, kubelet, and kubectl:
 
 ```bash
 cd /usr/bin
