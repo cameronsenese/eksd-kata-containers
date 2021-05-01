@@ -14,7 +14,7 @@ But for those of us that are faced with the challenge of needing to running untr
 
 An effective approach to improve workload isolation is to run each Pod within its own dedicated VM. This provides each Pod with a dedicated hypervisor, OS kernel, memory, and virtualized devices which are completely separate from the host OS. In this deployment scenario, when there's a vulnerability in the containerised workload - the hypervisor within the Pod provides a security boundary which protects the host operating system, as well as other workloads running on the host.
 
-![alt text](images/kata-vs-traditional.png "Kata vs. Traditional containers")
+![alt text](images/kata-vs-traditional.png "Kata vs. Traditional containers")  
 *Image courtesy of https://katacontainers.io*
 
 If you're running on the AWS cloud, Amazon have made this approach very simple. Scheduling Pods using the managed Kubernetes service [EKS](https://aws.amazon.com/eks) with [Fargate](https://aws.amazon.com/fargate/) actually ensures that each Kubernetes Pod is automatically encapsulated inside it's own dedicated VM. This provides the highest level of isolation for each containerised workload.
