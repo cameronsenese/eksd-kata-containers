@@ -334,7 +334,7 @@ nodeRegistration:
 Run the `kubeadm init` command, identifying the `config` file as follows:
 
 ```bash
-sudo kubeadm init --config /eksd-kata-containers/config/kube.yaml
+sudo kubeadm init --config eksd-kata-containers/config/kube.yaml
 ...
 [init] Using Kubernetes version: v1.18.9-eks-1-18-1
 [preflight] Running pre-flight checks
