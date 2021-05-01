@@ -33,7 +33,7 @@ This is a deployment pattern that can be adopted to provide a very high degree o
 
 Kata Containers utilizes open source hypervisors as an isolation boundary for each container (or collection of containers in a Pod).
 
-With Kata Containers, a second layer of isolation is created on top of those provided by traditional namespace-containers. The hardware virtualization interface is the basis of this additional layer. Kata will launch a lightweight virtual machine, and use the VM guest’s Linux kernel to create a container workload, or workloads in the case of multi-container Pods. In Kubernetes and in the Kata implementation, the sandbox is implemented at the Pod level. In Kata, this sandbox is created using a virtual machine.
+With Kata Containers, a second layer of isolation is created on top of those provided by traditional namespace containers. The hardware virtualization interface is the basis of this additional layer. Kata will launch a lightweight virtual machine, and use the VM guest’s Linux kernel to create a container workload, or workloads in the case of multi-container Pods. In Kubernetes and in the Kata implementation, the sandbox is implemented at the Pod level. In Kata, this sandbox is created using a virtual machine.
 
 Kata currently supports [multiple hypervisors](https://github.com/kata-containers/kata-containers/blob/main/docs/hypervisors.md), including: QEMU/KVM, Cloud Hypervisor/KVM, and Firecracker/KVM.
 
