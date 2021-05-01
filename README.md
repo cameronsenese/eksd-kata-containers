@@ -398,7 +398,7 @@ kubectl apply -f eksd-kata-containers/config/runtimeclass.yaml
 
 Sample Pod specs have been provided in the `config` directory within the `eksd-kata-containers` repository.
 
-`nginx-kata.yaml` will schedule a pod within a VM using Kata Containers by specifying `kata` as the `runtimeClassName`.
+`nginx-kata.yaml` will schedule a pod within a VM using Kata Containers by specifying `kata` as the `runtimeClassName`:
 
 ```yaml
 apiVersion: v1
@@ -412,7 +412,7 @@ spec:
     image: nginx
 ```
 
-`nginx.yaml` will schedule a pod using the default containerd runtime (runc).
+`nginx.yaml` will schedule a pod using the default containerd runtime (runc):
 
 ```yaml
 apiVersion: v1
@@ -425,14 +425,14 @@ spec:
     image: nginx
 ```
 
-Schedule the Pods using kubectl.
+Schedule the Pods using kubectl:
 
 ```bash
 kubectl apply -f eksd-kata-containers/config/nginx-kata.yaml
 kubectl apply -f eksd-kata-containers/config/nginx.yaml
 ```
 
-You will now have x2 nginx pods running in the cluster, each using different container runtimes. To validate that the nginx-kata Pod has been scheduled inside a VM, exec into each container and retrieve the kernel version .
+You will now have x2 nginx pods running in the cluster, each using different container runtimes. To validate that the nginx-kata Pod has been scheduled inside a VM, exec into each container and retrieve the kernel version:
 
 ```bash
 kubectl exec -it nginx-kata -- bash -c "uname -r"
