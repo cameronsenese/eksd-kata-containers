@@ -213,7 +213,7 @@ containerd is now able to run containers using the Kata Containers runtime.
 
 In order to test that containerd can successfully run a Kata container, a shell script named `test-kata.sh` has been provided in the `script` directory within the `eksd-kata-containers` repository.
 
-`test-kata.sh` uses the `ctr` CLI util to pull and run a busybox image as a Kata container, and retrieves the kernel version from within the Kata VM. The script returns both the kernel version reported by busybox from within the Kata VM, as well as the host OS kernel version. Per the sample output, the container (VM) kernel is different to the host OS kernel:
+`test-kata.sh` uses the `ctr` CLI util to pull and run a busybox image as a Kata container, and retrieves the kernel version from within the Kata VM. The script returns both the kernel version reported by busybox from within the Kata VM, as well as the host OS kernel version. Per the sample output, the container kernel (hosted in the VM) is different to the host OS kernel:
 
 ```bash
 chmod +x eksd-kata-containers/script/check-kata.sh
