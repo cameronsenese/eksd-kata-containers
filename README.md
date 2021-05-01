@@ -21,7 +21,7 @@ If you're running on the AWS cloud, Amazon have made this approach very simple. 
 
 If you need to provide a similar level of workload isolation as EKS with Fargate when operating outside of the AWS cloud (e.g. on premises, or at the edge in a hybrid deployment scenario), then [Kata Containers](https://katacontainers.io) is a technology worth considering. Kata Containers is an implementation of a lightweight VM that seamlessly integrates with the container ecosystem, and can be used by Kubernetes to schedule Pods inside of VMs.
 
-The following tutorial will take you through a deployment scenario where we bootstrap a Kubernetes cluster using Amazon EKS Distro (EKS-D), and configure the Kubernetes to be capable of scheduling Pods inside VMs using Kata Containers.
+The following tutorial will take you through a deployment scenario where we bootstrap a Kubernetes cluster using Amazon EKS Distro (EKS-D), and configure Kubernetes to be capable of scheduling Pods inside VMs using Kata Containers.
 
 This is a deployment pattern that can be adopted to provide a very high degree of workload isolation when provisioning clusters outside of the AWS cloud, for example on-premises, edge locations, or on alternate cloud platforms:
 
