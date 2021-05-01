@@ -15,8 +15,7 @@ But for those of us that are faced with the challenge of needing to running untr
 An effective approach to improve workload isolation is to run each Pod within its own dedicated VM. This provides each Pod with a dedicated hypervisor, OS kernel, memory, and virtualized devices which are completely separate from the host OS. In this deployment scenario, when there's a vulnerability in the containerised workload - the hypervisor within the Pod provides a security boundary which protects the host operating system, as well as other workloads running on the host.
 
 ![alt text](images/kata-vs-traditional.png "Kata vs. Traditional containers")
-
-Image courtesy of https://katacontainers.io
+> *Image courtesy of https://katacontainers.io*
 
 If you're running on the AWS cloud, Amazon have made this approach very simple. Scheduling Pods using the managed Kubernetes service [EKS](https://aws.amazon.com/eks) with [Fargate](https://aws.amazon.com/fargate/) actually ensures that each Kubernetes Pod is automatically encapsulated inside it's own dedicated VM. This provides the highest level of isolation for each containerised workload.
 
@@ -47,8 +46,7 @@ Kata Containers 1.5 introduced the `shimv2` for containerd 1.2.0, reducing the c
 When configuring Kubernetes to integrate with Kata, typically a Kubernetes [`RuntimeClass`](https://kubernetes.io/docs/concepts/containers/runtime-class/) is created. The RuntimeClass provides the ability to select the container runtime configuration to be used for a given workload via the Pod spec submitted to the Kubernetes API.
 
 ![alt text](images/kata-shim-v2.png "Kata Shim V2")
-
-Image courtesy of https://katacontainers.io
+> *Image courtesy of https://katacontainers.io*
 
 #### About Amazon EKS Distro
 
@@ -57,7 +55,9 @@ Image courtesy of https://katacontainers.io
 You can deploy EKS Distro clusters and let AWS take care of testing and tracking Kubernetes updates, dependencies, and patches. The source code, open source tools, and settings are provided for reproducible builds. EKS Distro provides extended support for Kubernetes, with builds of previous versions updated with the latest security patches. EKS Distro is available as open source on [GitHub](https://github.com/aws/eks-distro).
 
 
-## Tutorial Overview
+## Tutorial
+
+### Overview
 
 This tutorial will guide you through the following procedure:
 
@@ -96,6 +96,7 @@ sudo setenforce 0
 ```
 
 Make sure that swap is disabled and that no swap areas are reinstated on reboot. For example, type:
+
 ```bash
 sudo swapoff -a
 ```
@@ -105,6 +106,7 @@ Permanently disable swap by commenting out or deleting any swap areas in /etc/fs
 Depending on the exact Linux system you installed, you may need to install additional packages. For example, with an RPM-based (Amazon Linux, CentOS, RHEL or Fedora), ensure that the `iproute-tc`, `socat`, and `conntrack-tools` packages are installed.
 
 To optionally enable a firewall, run the following commands, including opening ports required by Kubernetes:
+
 ```bash
 sudo yum install firewalld -y
 sudo systemctl start firewalld
@@ -113,9 +115,11 @@ sudo firewall-cmd --zone=public --permanent --add-port=6443/tcp --add-port=2379-
 ```
 
 #### Install container runtime, Kata Containers, and supporting services
+
 Next we need to install a container runtime ([containerd](https://containerd.io) in this example), Kata Containers, and the EKS-D versions of Kubernetes software components.
 
 It's recommended that for production environments both the containerd runtime and Kata Containers are installed using official distribution packages. In this example we will utilise [Kata Manager](https://github.com/kata-containers/kata-containers/blob/main/utils/README.md), which will perform a scripted installation of both components:
+
 ```
 repo="github.com/kata-containers/tests"
 go get -d "$repo"
@@ -124,6 +128,7 @@ kata-manager.sh install-packages
 ```
 
 Once installed, update the system path to include Kata binaries:
+
 ```bash
 sudo su
 PATH=$PATH:/opt/kata/bin/
@@ -203,6 +208,7 @@ sudo systemctl start containerd
 containerd is now able to run containers using the Kata Containers runtime. 
 
 #### Test Kata with containerd
+
 In order to test that containerd can successfully run a Kata container, a shell script named `test-kata.sh` has been provided in the `script` directory within the `eksd-kata-containers` repository.
 
 `test-kata.sh` uses the `ctr` CLI util to pull and run a busybox image as a Kata container, and retrieves the kernel version from within the Kata VM. The script returns both the kernel version reported by busybox from within the Kata VM, as well as the host OS kernel version. Per the sample output, the container (VM) kernel is different to the host OS kernel:
@@ -227,7 +233,6 @@ Test successful:
   Container kernel version : 5.4.71
 ```
 
-
 The sample containerd configuration file will direct Kata to use the QEMU/KVM hypervisor, per the `ConfigFile` directive on line 19. Configuration files for Cloud Hypervisor/KVM, and Firecracker/KVM are also installed with Kata Containers:
 
  - Firecracker: `/opt/kata/share/defaults/kata-containers/configuration-fc.toml`
@@ -236,7 +241,6 @@ The sample containerd configuration file will direct Kata to use the QEMU/KVM hy
 To select an alternate hypervisor, update the ConfigFile directive and restart containerd.
 
 ### Prepare Kubernetes environment
-
 
 Pull and retag the pause, coredns, and etcd containers (copy and paste as one line):
 
@@ -250,6 +254,7 @@ sudo ctr image tag public.ecr.aws/eks-distro/etcd-io/etcd:v3.4.14-eks-1-18-1 pub
 ```
 
 Add the RPM repository to Google cloud RPM packages for Kubernetes by creating the following /etc/yum.repos.d/kubernetes.repo file:
+
 ```
 [kubernetes]
 name=Kubernetes
@@ -262,6 +267,7 @@ exclude=kubelet kubeadm kubectl
 ```
 
 Install the required Kubernetes packages:
+
 ```
 sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 ```
@@ -273,8 +279,8 @@ sudo modprobe br_netfilter
 echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
 ```
 
-
 Create the /var/lib/kubelet directory, then configure the /var/lib/kubelet/kubeadm-flags.env file:
+
 ```
 sudo su
 mkdir -p /var/lib/kubelet
@@ -284,6 +290,7 @@ exit
 ```
 
 Get compatible binaries for kubeadm, kubelet, and kubectl. You can skip getting kubectl:
+
 ```
 cd /usr/bin
 sudo rm kubelet kubeadm kubectl
@@ -294,6 +301,7 @@ sudo chmod +x kubeadm kubectl kubelet
 ```
 
 Enable the kubelet service:
+
 ```
 sudo systemctl enable kubelet
 ```
@@ -303,6 +311,7 @@ sudo systemctl enable kubelet
 A sample `kube.yaml` file has been provided in the `config` directory within the `eksd-kata-containers` repository.
 
 Update the sample `kube.yaml` by providing the values for variables surrounded by {{ and }} within the `localAPIEndpoint` and `nodeRegistration` sections:
+
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
@@ -347,6 +356,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 Deploy a Pod network to the cluster. See Installing Addons (https://kubernetes.io/docs/concepts/cluster-administration/addons) for information on available Kubernetes Pod networks. For example, to deploy a Weaveworks network, type:
+
 ```
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=v1.18.9-eks-1-18-1"
 ...
@@ -360,11 +370,12 @@ You can also consider Calico or Cilium networks. Calico is popular because it ca
 ```
 
 If you are testing with a single node, untaint your master node:
+
 ```
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
-A sample `runtimeclass.yaml` file has been provided in the `config` directory within the `eksd-kata-containers` repository.
+A sample `runtimeclass.yaml` file has been provided in the `config` directory within the `eksd-kata-containers` repository:
 
 ``` yaml
 apiVersion: node.k8s.io/v1
