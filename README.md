@@ -120,7 +120,7 @@ Next we need to install a container runtime ([containerd](https://containerd.io)
 
 It's recommended that for production environments both the containerd runtime and Kata Containers are installed using official distribution packages. In this example we will utilise [Kata Manager](https://github.com/kata-containers/kata-containers/blob/main/utils/README.md), which will perform a scripted installation of both components:
 
-```
+```bash
 repo="github.com/kata-containers/tests"
 go get -d "$repo"
 PATH=$PATH:$GOPATH/src/${repo}/cmd/kata-manager
@@ -162,7 +162,7 @@ System can currently create Kata Containers
 
 Example `config.toml`:
 
-```
+```bash
 plugins.cri.containerd]
  no_pivot = false
 plugins.cri.containerd.runtimes]
@@ -244,7 +244,7 @@ To select an alternate hypervisor, update the ConfigFile directive and restart c
 
 Pull and retag the pause, coredns, and etcd containers (copy and paste as one line):
 
-```
+```bash
 sudo ctr image pull public.ecr.aws/eks-distro/kubernetes/pause:v1.18.9-eks-1-18-1;\
 sudo ctr image pull public.ecr.aws/eks-distro/coredns/coredns:v1.7.0-eks-1-18-1; \
 sudo ctr image pull public.ecr.aws/eks-distro/etcd-io/etcd:v3.4.14-eks-1-18-1; \
@@ -255,7 +255,7 @@ sudo ctr image tag public.ecr.aws/eks-distro/etcd-io/etcd:v3.4.14-eks-1-18-1 pub
 
 Add the RPM repository to Google cloud RPM packages for Kubernetes by creating the following /etc/yum.repos.d/kubernetes.repo file:
 
-```
+```bash
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch
@@ -268,12 +268,13 @@ exclude=kubelet kubeadm kubectl
 
 Install the required Kubernetes packages:
 
-```
+```bash
 sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 ```
 
 Load the br_netfilter kernel module, and create /etc/modules-load.d/k8s.conf:
-```
+
+```bash
 echo br_netfilter | sudo tee /etc/modules-load.d/k8s.conf
 sudo modprobe br_netfilter
 echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
@@ -281,7 +282,7 @@ echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
 
 Create the /var/lib/kubelet directory, then configure the /var/lib/kubelet/kubeadm-flags.env file:
 
-```
+```bash
 sudo su
 mkdir -p /var/lib/kubelet
 cat /var/lib/kubelet/kubeadm-flags.env
@@ -291,7 +292,7 @@ exit
 
 Get compatible binaries for kubeadm, kubelet, and kubectl. You can skip getting kubectl:
 
-```
+```bash
 cd /usr/bin
 sudo rm kubelet kubeadm kubectl
 sudo wget https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1/artifacts/kubernetes/v1.18.9/bin/linux/amd64/kubelet; \
@@ -302,7 +303,7 @@ sudo chmod +x kubeadm kubectl kubelet
 
 Enable the kubelet service:
 
-```
+```bash
 sudo systemctl enable kubelet
 ```
 
@@ -330,7 +331,7 @@ nodeRegistration:
 
 Run the `kubeadm init` command, identifying the `config` file as follows:
 
-```
+```bash
 sudo kubeadm init --config /eksd-kata-containers/config/kube.yaml
 ...
 [init] Using Kubernetes version: v1.18.9-eks-1-18-1
@@ -349,7 +350,7 @@ Your Kubernetes cluster should now be up and running. The kubeadm output shows t
 
 Follow the instructions for configuring the client. To configure the client locally, type:
 
-```
+```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -357,7 +358,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 Deploy a Pod network to the cluster. See Installing Addons (https://kubernetes.io/docs/concepts/cluster-administration/addons) for information on available Kubernetes Pod networks. For example, to deploy a Weaveworks network, type:
 
-```
+```bash
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=v1.18.9-eks-1-18-1"
 ...
 serviceaccount/weave-net created
@@ -371,7 +372,7 @@ You can also consider Calico or Cilium networks. Calico is popular because it ca
 
 If you are testing with a single node, untaint your master node:
 
-```
+```bash
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
