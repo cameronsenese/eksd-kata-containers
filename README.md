@@ -350,7 +350,7 @@ Your Kubernetes cluster should now be up and running. The kubeadm output shows t
 
 #### Configure the cluster to schedule Kata Containers
 
-Follow the instructions for configuring the client. To configure the client locally, type:
+Configure the Kubernetes client locally:
 
 ```bash
 mkdir -p $HOME/.kube
