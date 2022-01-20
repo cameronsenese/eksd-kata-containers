@@ -10,7 +10,7 @@ Standard Linux containers allow applications to make system calls directly to th
 
 If you're not running untrusted code in your containers, or hosting a multi-tenant platform; and you've implemented good security practices for the services running within each container, you probably don't need to worry.
 
-But for those of us that are faced with the challenge of needing to running untrusted code in our containers, or perhaps are hosting a multi-tenant platform - providing the highest levels of isolation between workloads in a Kubernetes environment can be challenging.
+But for those of us that are faced with the challenge of needing to run untrusted code in our containers, or perhaps are hosting a multi-tenant platform - providing the highest levels of isolation between workloads in a Kubernetes environment can be challenging.
 
 An effective approach to improve workload isolation is to run each Pod within its own dedicated VM. This provides each Pod with a dedicated hypervisor, OS kernel, memory, and virtualized devices which are completely separate from the host OS. In this deployment scenario, when there's a vulnerability in the containerised workload - the hypervisor within the Pod provides a security boundary which protects the host operating system, as well as other workloads running on the host.
 
